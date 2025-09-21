@@ -7,8 +7,7 @@ export const PageloadOverlay = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const hasVisited = false;
-    // sessionStorage.getItem("hasVisited");
+    const hasVisited = sessionStorage.getItem("hasVisited");
 
     if (!hasVisited) {
       setLoading(true);
