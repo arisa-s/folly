@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import TypeWriter from "./components/TypeWriter";
 import { useScrollAnimation } from "./hooks/useScrollAnimation";
+import { PageloadOverlay } from "./components/LoadingPage";
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -28,7 +29,7 @@ export default function Home() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.0, 0.0, 0.2, 1] },
+      transition: { duration: 0.8, ease: "easeOut" as const },
     },
   };
 
@@ -54,36 +55,27 @@ export default function Home() {
 
   return (
     <div ref={containerRef} className="min-h-screen bg-white text-black">
+      <PageloadOverlay />
       {/* Hero Section with Parallax */}
       <motion.section
         style={{ y: heroY, opacity: heroOpacity }}
         className="min-h-screen flex flex-col items-center justify-center px-8 fixed w-full"
       >
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
-          <Image
-            src="/images/logo/WORDMARK_FOLLY_BLACK_CMYK.png"
-            alt="Folly"
-            width={1000}
-            height={1000}
-            className="w-full h-auto max-w-[200px] mb-16"
-          />
-        </motion.div>
+        <Image
+          src="/images/logo/WORDMARK_FOLLY_BLACK_CMYK.png"
+          alt="Folly"
+          width={1000}
+          height={1000}
+          className="w-full h-auto max-w-[200px] mb-16"
+        />
 
-        <motion.div
-          className="font-secondary text-sm text-center max-w-2xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-        >
-          <p className="leading-relaxed">
-            A production company that believes in clarity, structure, <br />
-            and having snacks in the room.
-          </p>
-        </motion.div>
+        <p className="font-secondary text-sm leading-relaxed text-center">
+          A production company that believes in clarity, structure, and having
+          snacks in the room.
+          <br />
+          Founded by two women who’ve been doing this (in some form) since age
+          four.
+        </p>
       </motion.section>
 
       {/* Spacer for fixed hero */}
@@ -179,7 +171,7 @@ export default function Home() {
       >
         <motion.div className="max-w-xl mx-auto">
           <motion.h2
-            className="font-accent text-xs uppercase tracking-wider mb-12"
+            className="font-accent uppercase tracking-wider mb-12 h-12"
             initial={{ opacity: 0, letterSpacing: "0.1em" }}
             whileInView={{ opacity: 1, letterSpacing: "0.3em" }}
             transition={{ duration: 1 }}
@@ -235,12 +227,13 @@ export default function Home() {
         </motion.h2>
 
         <motion.div className="text-center space-y-2" variants={fadeInUp}>
-          <motion.p
+          <motion.a
             className="font-secondary text-sm"
             whileHover={{ scale: 1.05 }}
+            href="mailto:hello@follyproduction.com"
           >
             hello@follyproduction.com
-          </motion.p>
+          </motion.a>
 
           <p className="font-secondary text-xs text-gray-600">
             Yes, we read your attachment.
