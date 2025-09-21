@@ -137,7 +137,7 @@ export default function Home() {
               variants={staggerItem}
             >
               <TypeWriter
-                text="In humanity's last act, who plays god?"
+                text="In humanity&apos;s last act, who plays god?"
                 startTyping={workVisible}
                 delay={35}
               />
@@ -193,7 +193,7 @@ export default function Home() {
               "Relationships over business",
               "Narrative over views",
               "Knowing when to stop",
-              'Getting stuck and thinking: "Make it weirder."',
+              &apos;Getting stuck and thinking: &quot;Make it weirder.&quot;&apos;,
             ].map((item, index) => (
               <motion.li
                 key={index}
