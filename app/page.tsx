@@ -74,14 +74,14 @@ export default function Home() {
         </motion.div>
 
         <motion.div
-          className="font-mono text-sm text-center max-w-2xl"
+          className="font-secondary text-sm text-center max-w-2xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
         >
           <p className="leading-relaxed">
-            A production company that believes in clarity, structure, and having
-            snacks in the room.
+            A production company that believes in clarity, structure, <br />
+            and having snacks in the room.
           </p>
         </motion.div>
       </motion.section>
@@ -99,7 +99,7 @@ export default function Home() {
       >
         <div className="max-w-2xl mx-auto text-center space-y-8">
           <motion.p
-            className="font-mono text-sm leading-loose"
+            className="font-secondary text-sm leading-loose"
             variants={fadeInUp}
           >
             We&apos;re not a collective. <br />
@@ -120,13 +120,13 @@ export default function Home() {
       >
         <motion.div className="max-w-2xl mx-auto">
           <motion.h2
-            className="font-mono text-xs uppercase tracking-wider mb-12"
+            className="font-accent text-xs uppercase tracking-wider mb-12"
             initial={{ opacity: 0, letterSpacing: "0.1em" }}
             whileInView={{ opacity: 1, letterSpacing: "0.3em" }}
             transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
-            Current Project
+            Current
           </motion.h2>
 
           <motion.div
@@ -136,12 +136,12 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <motion.h3 className="font-serif text-3xl" variants={staggerItem}>
+            <motion.h3 className="font-primary text-3xl" variants={staggerItem}>
               DOOMERS
             </motion.h3>
 
             <motion.p
-              className="font-mono text-sm leading-relaxed"
+              className="font-secondary text-sm leading-relaxed"
               variants={staggerItem}
             >
               <TypeWriter
@@ -152,7 +152,7 @@ export default function Home() {
             </motion.p>
 
             <motion.div
-              className="font-mono text-xs space-y-1 text-gray-600"
+              className="font-secondary text-xs space-y-1 text-gray-600"
               variants={staggerItem}
             >
               <p>18 Sept - 3 Oct 2025</p>
@@ -162,7 +162,7 @@ export default function Home() {
             <motion.a
               href="https://www.doomerslondon.com"
               target="_blank"
-              className="inline-block font-mono text-sm underline hover:no-underline transition-all"
+              className="inline-block font-secondary text-sm underline hover:no-underline transition-all"
               variants={staggerItem}
               whileHover={{ x: 10 }}
             >
@@ -178,8 +178,17 @@ export default function Home() {
         className="min-h-screen flex items-center justify-center px-8 py-20 bg-white"
       >
         <motion.div className="max-w-xl mx-auto">
+          <motion.h2
+            className="font-accent text-xs uppercase tracking-wider mb-12"
+            initial={{ opacity: 0, letterSpacing: "0.1em" }}
+            whileInView={{ opacity: 1, letterSpacing: "0.3em" }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+          >
+            How We Work
+          </motion.h2>
           <motion.ul
-            className="font-mono text-sm space-y-4"
+            className="font-secondary text-sm space-y-4"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
@@ -209,14 +218,14 @@ export default function Home() {
 
       {/* Contact Section */}
       <motion.section
-        ref={contactRef as React.RefObject<HTMLElement>>
+        ref={contactRef as React.RefObject<HTMLElement>}
         className="min-h-[60vh] flex flex-col items-center justify-center px-8 space-y-6"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
       >
         <motion.h2
-          className="font-mono text-lg"
+          className="font-accent text-lg"
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
@@ -225,27 +234,16 @@ export default function Home() {
           Contact us
         </motion.h2>
 
-        <motion.div
-          className="font-mono text-sm text-gray-600"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          We take the work seriously. Ourselves, not so much.
-        </motion.div>
-
         <motion.div className="text-center space-y-2" variants={fadeInUp}>
-          <motion.p className="font-mono text-sm" whileHover={{ scale: 1.05 }}>
+          <motion.p
+            className="font-secondary text-sm"
+            whileHover={{ scale: 1.05 }}
+          >
             hello@follyproduction.com
           </motion.p>
 
-          <p className="font-mono text-xs text-gray-600">
-            <TypeWriter
-              text="Yes, we read your attachment."
-              startTyping={contactVisible}
-              delay={45}
-            />
+          <p className="font-secondary text-xs text-gray-600">
+            Yes, we read your attachment.
           </p>
         </motion.div>
       </motion.section>
