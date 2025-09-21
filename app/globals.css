@@ -1,15 +1,53 @@
 @import "tailwindcss";
 
+/* Font Face Declarations */
+@font-face {
+  font-family: 'Sneaky Times';
+  src: url('/fonts/sneakyTimes/Sneaky-Times.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi Bold';
+  src: url('/fonts/satoshi/Satoshi-Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Folly Satoshi';
+  src: url('/fonts/satoshi/Folly-Satoshi.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* Folly Color Palette */
+  --folly-white: #fefaf2;
+  --folly-red: #60202e;
+  --folly-blue: #69acc2;
+  --folly-yellow: #cab63c;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-primary: 'Sneaky Times', serif;
+  --font-secondary: 'Satoshi Bold', sans-serif;
+  --font-accent: 'Folly Satoshi', sans-serif;
+  
+  /* Folly Colors */
+  --color-folly-white: var(--folly-white);
+  --color-folly-red: var(--folly-red);
+  --color-folly-blue: var(--folly-blue);
+  --color-folly-yellow: var(--folly-yellow);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,7 +58,100 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: #000000;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Minimal Typography */
+.font-mono {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+}
+
+.font-serif {
+  font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+/* Remove default margin for better control */
+h1, h2, h3, p {
+  margin: 0;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Typing cursor animation */
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+.typing-cursor {
+  animation: blink 1s infinite;
+}
+
+/* Smooth scroll reveal */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Subtle float animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Line drawing animation */
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Selection styling */
+::selection {
+  background: #000;
+  color: #fff;
+}
+
+/* Smooth transitions */
+* {
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
