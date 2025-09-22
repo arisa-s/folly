@@ -193,7 +193,7 @@ export default function Home() {
               "Relationships over business",
               "Narrative over views",
               "Knowing when to stop",
-              "Getting stuck and thinking: &quot;Make it weirder.&quot;",
+              "Getting stuck and thinking: Make it weirder.",
             ].map((item, index) => (
               <motion.li
                 key={index}

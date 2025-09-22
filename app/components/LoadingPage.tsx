@@ -1,19 +1,20 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export const PageloadOverlay = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const hasVisited = sessionStorage.getItem("hasVisited");
+    const hasVisited = false;
 
     if (!hasVisited) {
       setLoading(true);
       sessionStorage.setItem("hasVisited", "true"); // Mark as visited for this session
 
-      const timer = setTimeout(() => setLoading(false), 5000);
+      const timer = setTimeout(() => setLoading(false), 3000);
       return () => clearTimeout(timer);
     }
   }, []);
@@ -32,45 +33,33 @@ export const PageloadOverlay = () => {
           <div className="absolute inset-0 bg-white/30 backdrop-blur-sm" />
 
           <div className="relative z-10 flex flex-col items-center">
-            <motion.img
+            <Image
+              width={96}
+              height={96}
               src="/images/logo/FOLLY_SYMBOL_COLOR_RGB.png"
-              key="loader"
-              className="h-24 md:h-32 mb-8"
-              style={{ transformOrigin: "top right" }}
-              initial={{ opacity: 1, x: 0, y: 0 }}
-              animate={{
-                opacity: 1,
-                x: [
-                  0,
-                  "40vw",
-                  0,
-                  "-40vw",
-                  0,
-                  "30vw",
-                  "-30vw",
-                  "25vw",
-                  "-25vw",
-                  0,
-                ],
-                y: [
-                  0,
-                  "25vh",
-                  "40vh",
-                  "25vh",
-                  0,
-                  "-25vh",
-                  "25vh",
-                  "-15vh",
-                  "15vh",
-                  0,
-                ],
-                transition: {
-                  duration: 8,
-                  ease: "linear",
-                },
-              }}
-              exit={{ opacity: 1, x: 0, y: 0 }}
+              className="h-24 md:h-24 mb-8"
+              alt="Folly Logo"
             />
+
+            {/* Animated dots */}
+            <div className="flex space-x-2">
+              {[0, 1, 2].map((index) => (
+                <motion.div
+                  key={index}
+                  className="w-2 h-2 bg-folly-red rounded-full"
+                  animate={{
+                    scale: [1, 1, 1],
+                    opacity: [0.2, 1, 1],
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    delay: index * 0.5,
+                    ease: "easeInOut",
+                  }}
+                />
+              ))}
+            </div>
           </div>
         </motion.div>
       )}
