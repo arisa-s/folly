@@ -21,7 +21,7 @@ export default function Home() {
   // Animation refs
   const [workRef, workVisible] = useScrollAnimation({ threshold: 0.3 });
   const [valuesRef] = useScrollAnimation({ threshold: 0.3 });
-  const [contactRef, contactVisible] = useScrollAnimation({ threshold: 0.3 });
+  const [contactRef] = useScrollAnimation({ threshold: 0.3 });
 
   // Animation variants
   const fadeInUp = {
@@ -59,7 +59,7 @@ export default function Home() {
       {/* Hero Section with Parallax */}
       <motion.section
         style={{ y: heroY, opacity: heroOpacity }}
-        className="min-h-screen flex flex-col items-center justify-center px-8 fixed w-full"
+        className="min-h-screen flex flex-col items-center justify-center px-8 fixed w-full pointer-events-none z-0"
       >
         <Image
           src="/images/logo/WORDMARK_FOLLY_BLACK_CMYK.png"
@@ -105,7 +105,7 @@ export default function Home() {
       {/* Our Work Section */}
       <motion.section
         ref={workRef as React.RefObject<HTMLElement>}
-        className="min-h-[80vh] flex items-center justify-center px-8 bg-white"
+        className="min-h-[80vh] flex items-center justify-center px-8 bg-white relative z-10"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
@@ -154,7 +154,7 @@ export default function Home() {
             <motion.a
               href="https://www.doomerslondon.com"
               target="_blank"
-              className="inline-block font-secondary text-sm underline hover:no-underline transition-all"
+              className="inline-block font-secondary text-sm underline hover:no-underline transition-all cursor-pointer"
               variants={staggerItem}
               whileHover={{ x: 10 }}
             >
@@ -167,7 +167,7 @@ export default function Home() {
       {/* How We Work Section */}
       <motion.section
         ref={valuesRef as React.RefObject<HTMLElement>}
-        className="min-h-screen flex items-center justify-center px-8 py-20 bg-white"
+        className="min-h-screen flex items-center justify-center px-8 py-20 bg-white relative z-10"
       >
         <motion.div className="max-w-xl mx-auto">
           <motion.h2
@@ -211,7 +211,7 @@ export default function Home() {
       {/* Contact Section */}
       <motion.section
         ref={contactRef as React.RefObject<HTMLElement>}
-        className="min-h-[60vh] flex flex-col items-center justify-center px-8 space-y-6"
+        className="min-h-[60vh] flex flex-col items-center justify-center px-8 space-y-6 relative z-10"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
@@ -228,7 +228,7 @@ export default function Home() {
 
         <motion.div className="text-center space-y-2" variants={fadeInUp}>
           <motion.a
-            className="font-secondary text-sm"
+            className="font-secondary text-sm cursor-pointer"
             whileHover={{ scale: 1.05 }}
             href="mailto:hello@follyproduction.com"
           >
