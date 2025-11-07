@@ -70,11 +70,7 @@ export default function Home() {
         />
 
         <p className="font-secondary text-sm leading-relaxed text-center">
-          A production company that believes in clarity, structure, and having
-          snacks in the room.
-          <br />
-          Founded by two women who’ve been doing this (in some form) since age
-          four.
+          Folly Productions - We make compeling theatre, television & film.
         </p>
       </motion.section>
 
@@ -94,10 +90,8 @@ export default function Home() {
             className="font-secondary text-sm leading-loose"
             variants={fadeInUp}
           >
-            We&apos;re not a collective. <br />
-            We&apos;re not a factory. <br />
-            We&apos;re not disruptors. <br />
-            We just make good work with good people.
+            Folly was created to make maningful work with talented people.
+            <br /> Out approach is driven by craft, connection and narrative.
           </motion.p>
         </div>
       </motion.section>
@@ -118,7 +112,7 @@ export default function Home() {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
-            Current
+            Past Projects
           </motion.h2>
 
           <motion.div
@@ -129,7 +123,7 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <motion.h3 className="font-primary text-3xl" variants={staggerItem}>
-              DOOMERS
+              DOOMERS, a play written by Matthew Gasda
             </motion.h3>
 
             <motion.p
@@ -187,13 +181,9 @@ export default function Home() {
             viewport={{ once: true, amount: 0.3 }}
           >
             {[
-              "Direction over aesthetic",
-              "Kindness over networking",
-              "Taste over trend",
-              "Relationships over business",
-              "Narrative over views",
-              "Knowing when to stop",
-              "Getting stuck and thinking: Make it weirder.",
+              "Room for surperise, build on preparation.",
+              "We plan carefully so that discovery can happen.",
+              "Our structure makes the spontaneity possible.",
             ].map((item, index) => (
               <motion.li
                 key={index}
@@ -230,13 +220,13 @@ export default function Home() {
           <motion.a
             className="font-secondary text-sm cursor-pointer"
             whileHover={{ scale: 1.05 }}
-            href="mailto:hello@follyproduction.com"
+            href="mailto:team@follyproduction.com"
           >
-            hello@follyproduction.com
+            team@follyproduction.com
           </motion.a>
 
           <p className="font-secondary text-xs text-gray-600">
-            Yes, we read your attachment.
+            Please attach materials - we&#39;re excited to read them
           </p>
         </motion.div>
       </motion.section>
