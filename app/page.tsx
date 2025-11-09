@@ -70,7 +70,7 @@ export default function Home() {
         />
 
         <p className="font-secondary text-sm leading-relaxed text-center">
-          Folly Productions - We make compeling theatre, television & film.
+          Folly Productions - We make compelling theatre, television & film.
         </p>
       </motion.section>
 
@@ -90,8 +90,8 @@ export default function Home() {
             className="font-secondary text-sm leading-loose"
             variants={fadeInUp}
           >
-            Folly was created to make maningful work with talented people.
-            <br /> Out approach is driven by craft, connection and narrative.
+            Folly was created to make meaningful work with talented people.
+            <br /> Our approach is driven by craft, connection and narrative.
           </motion.p>
         </div>
       </motion.section>
@@ -181,7 +181,7 @@ export default function Home() {
             viewport={{ once: true, amount: 0.3 }}
           >
             {[
-              "Room for surperise, build on preparation.",
+              "Room for surprise, build on preparation.",
               "We plan carefully so that discovery can happen.",
               "Our structure makes the spontaneity possible.",
             ].map((item, index) => (
@@ -220,9 +220,9 @@ export default function Home() {
           <motion.a
             className="font-secondary text-sm cursor-pointer"
             whileHover={{ scale: 1.05 }}
-            href="mailto:team@follyproduction.com"
+            href="mailto:team@follyproductions.com"
           >
-            team@follyproduction.com
+            team@follyproductions.com
           </motion.a>
 
           <p className="font-secondary text-xs text-gray-600">
