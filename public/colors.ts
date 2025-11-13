@@ -3,5 +3,5 @@ export const FOLLY_COLORS = {
   red: "#60202e",
   blue: "#69acc2",
   yellow: "#cab63c",
-  black: "#000000",
+  black: "#1a1a1a",
 } as const;
