@@ -9,6 +9,7 @@ import AboutSection from "./components/sections/AboutSection";
 import ArchiveSection from "./components/sections/ArchiveSection";
 import ProfileSection from "./components/sections/ProfileSection";
 import ContactSection from "./components/sections/ContactSection";
+import FooterSection from "./components/sections/FooterSection";
 import { FOLLY_COLORS } from "@/public/colors";
 import BackgroundColorLayer from "./components/BackgroundColorLayer";
 import HamburgerMenu from "./components/HamburgerMenu";
@@ -22,7 +23,7 @@ export default function Page() {
           id: "hero",
           component: <HeroSection />,
           title: "Hero",
-          bg: FOLLY_COLORS.black,
+          bg: "#000000",
           fg: FOLLY_COLORS.white,
         },
         {
@@ -64,17 +65,63 @@ export default function Page() {
   );
 
   const [active, setActive] = useState(0);
-  const sectionRefs = useRef<(HTMLElement | null)[]>([]); // HTMLElement fixes TS error
+  const sectionRefs = useRef<(HTMLElement | null)[]>([]);
+  const activeRef = useRef(0);
 
-  // Observe sections (viewport root)
+  // Update ref when active changes
+  useEffect(() => {
+    activeRef.current = active;
+  }, [active]);
+
+  // Observe sections (viewport root) - improved for mobile
   useEffect(() => {
     const refs = sectionRefs.current.filter(Boolean) as HTMLElement[];
     if (!refs.length) return;
 
+    const updateActiveSection = () => {
+      const viewportHeight = window.innerHeight;
+      const viewportCenter = viewportHeight / 2;
+
+      // Find which section is most visible (centered or has most area visible)
+      let maxVisibility = 0;
+      let newActive = activeRef.current;
+
+      refs.forEach((section, index) => {
+        const rect = section.getBoundingClientRect();
+
+        // Calculate how much of the section is visible in viewport
+        const visibleTop = Math.max(0, -rect.top);
+        const visibleBottom = Math.min(rect.height, viewportHeight - rect.top);
+        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+        const visibility = visibleHeight / viewportHeight;
+
+        // Bonus for sections near viewport center
+        const sectionCenter = rect.top + rect.height / 2;
+        const distanceFromCenter = Math.abs(sectionCenter - viewportCenter);
+        const centerBonus = Math.max(
+          0,
+          1 - distanceFromCenter / viewportHeight
+        );
+        const combinedVisibility = visibility * 0.7 + centerBonus * 0.3;
+
+        if (combinedVisibility > maxVisibility) {
+          maxVisibility = combinedVisibility;
+          newActive = index;
+        }
+      });
+
+      if (newActive !== activeRef.current) {
+        activeRef.current = newActive;
+        setActive(newActive);
+      }
+    };
+
+    // IntersectionObserver for desktop
     const observer = new IntersectionObserver(
       (entries) => {
         let maxRatio = 0;
-        let idx = active;
+        let idx = activeRef.current;
+
         for (const entry of entries) {
           const i = refs.indexOf(entry.target as HTMLElement);
           if (i !== -1 && entry.intersectionRatio > maxRatio) {
@@ -82,17 +129,54 @@ export default function Page() {
             idx = i;
           }
         }
-        if (idx !== active) setActive(idx);
+
+        if (idx !== activeRef.current) {
+          activeRef.current = idx;
+          setActive(idx);
+        }
       },
       {
-        // root: null means viewport
-        threshold: Array.from({ length: 101 }, (_, i) => i / 100),
+        root: null,
+        rootMargin: "-20% 0px -20% 0px", // Better detection on mobile
+        threshold: [0, 0.25, 0.5, 0.75, 1], // Simplified thresholds for better performance
       }
     );
 
     refs.forEach((node) => observer.observe(node));
-    return () => observer.disconnect();
-  }, [active]);
+
+    // Scroll listener as fallback for mobile (especially with CSS snap)
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateActiveSection();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    // Initial check
+    updateActiveSection();
+
+    // Add scroll listener as fallback for mobile (especially with CSS snap)
+    // This ensures color changes work even when IntersectionObserver is delayed
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Also listen to scrollend for better snap detection
+    if ("onscrollend" in window) {
+      window.addEventListener("scrollend", updateActiveSection, {
+        passive: true,
+      });
+    }
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+      if ("onscrollend" in window) {
+        window.removeEventListener("scrollend", updateActiveSection);
+      }
+    };
+  }, []); // Empty dependency array - only run once
 
   const scrollTo = (index: number) => {
     const node = sectionRefs.current[index];
@@ -118,7 +202,7 @@ export default function Page() {
   };
 
   return (
-    <div className="relative min-h-screen w-full">
+    <div className="relative min-h-screen w-full overflow-x-hidden">
       {/* Animated background (no remount, no opacity fade to avoid white flash) */}
       <BackgroundColorLayer initialColor={sections[0].bg} color={current.bg} />
 
@@ -141,13 +225,13 @@ export default function Page() {
       {/* Logo and Section Title - Top left, hidden on Hero section */}
       {active !== 0 && (
         <motion.div
-          className="fixed left-6 top-6 z-[60] flex items-center gap-12"
+          className="fixed left-3 top-3 md:left-6 md:top-6 z-[60] flex items-center gap-3 md:gap-12"
           initial={{ opacity: 0, x: -20, scale: 0.9 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
           exit={{ opacity: 0, x: -20, scale: 0.9 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
-          <div className="relative w-20">
+          <div className="relative w-12 md:w-20">
             {shouldUseMask(current.fg) ? (
               <motion.div
                 className="w-full"
@@ -184,7 +268,7 @@ export default function Page() {
           <AnimatePresence mode="wait">
             <motion.h2
               key={current.id}
-              className="text-xl font-accent"
+              className="text-sm md:text-xl font-accent"
               style={{ color: current.fg }}
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
@@ -203,7 +287,7 @@ export default function Page() {
         transition={{ duration: 0.4 }}
         className="relative"
       >
-        {/* Use the window as the scroll container with CSS snap */}
+        {/* Scroll container with CSS snap - uses window scroll on mobile */}
         <div className="snap-y snap-mandatory">
           {sections.map((s, i) => (
             <section
@@ -212,15 +296,26 @@ export default function Page() {
               ref={(el) => {
                 sectionRefs.current[i] = el;
               }}
-              className="snap-start h-screen w-full grid place-items-center px-6"
+              className="snap-start h-screen w-full grid place-items-center px-4 md:px-6"
             >
-              <div className="relative z-10 w-full h-full grid place-items-center">
+              <div className="relative z-10 w-full min-h-full grid place-items-center py-8 md:py-0">
                 {s.component}
               </div>
             </section>
           ))}
         </div>
       </motion.div>
+
+      {/* Footer - outside snap container */}
+      <motion.footer
+        className="relative w-full"
+        style={{
+          backgroundColor: sections[sections.length - 1].bg,
+          color: sections[sections.length - 1].fg,
+        }}
+      >
+        <FooterSection />
+      </motion.footer>
     </div>
   );
 }

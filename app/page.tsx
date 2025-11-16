@@ -95,7 +95,6 @@ export default function Home() {
           </motion.p>
         </div>
       </motion.section>
-
       {/* Our Work Section */}
       <motion.section
         ref={workRef as React.RefObject<HTMLElement>}

@@ -24,23 +24,23 @@ export default function HamburgerMenu({
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="fixed right-4 top-4 z-50">
+    <div className="fixed right-3 top-3 md:right-4 md:top-4 z-50">
       <button
         aria-label="Open menu"
         onClick={() => setMenuOpen((v) => !v)}
-        className="group relative inline-flex h-24 w-24 items-center justify-center cursor-pointer"
+        className="group relative inline-flex h-12 w-12 md:h-24 md:w-24 items-center justify-center cursor-pointer"
       >
-        <div className="space-y-2">
+        <div className="space-y-1.5 md:space-y-2">
           <motion.span
-            className="block h-0.5 w-12 rounded transition-transform"
+            className="block h-0.5 w-8 md:w-12 rounded transition-transform"
             style={{ backgroundColor: textColor }}
           />
           <motion.span
-            className="block h-0.5 w-12 rounded"
+            className="block h-0.5 w-8 md:w-12 rounded"
             style={{ backgroundColor: textColor }}
           />
           <motion.span
-            className="block h-0.5 w-12 rounded transition-transform"
+            className="block h-0.5 w-8 md:w-12 rounded transition-transform"
             style={{ backgroundColor: textColor }}
           />
         </div>
@@ -65,7 +65,7 @@ export default function HamburgerMenu({
                         onSelect(i);
                         setMenuOpen(false);
                       }}
-                      className={`block w-full px-8 py-4 text-2xl hover:opacity-70 transition-opacity ${
+                      className={`block w-full px-8 py-4 text-xl md:text-2xl hover:opacity-70 transition-opacity ${
                         i === active ? "font-semibold" : "font-normal"
                       }`}
                       style={{ color: textColor }}

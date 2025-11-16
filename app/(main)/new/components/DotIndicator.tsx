@@ -18,15 +18,15 @@ export default function DotIndicator({
   return (
     <nav
       aria-label="Section indicator"
-      className="fixed inset-y-0 left-4 md:left-10 z-40 flex items-center"
+      className="fixed inset-y-0 left-2 md:left-10 z-40 flex items-center"
     >
-      <ul className="flex flex-col gap-3">
+      <ul className="flex flex-col gap-2 md:gap-3">
         {Array.from({ length: count }).map((_, i) => (
           <li key={i}>
             <button
               aria-label={`Go to section ${i + 1}`}
               onClick={() => onSelect(i)}
-              className="relative h-3.5 w-3.5"
+              className="relative h-2.5 w-2.5 md:h-3.5 md:w-3.5"
             >
               <motion.span
                 className="absolute inset-0 rounded-full"
