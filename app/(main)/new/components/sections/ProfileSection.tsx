@@ -17,7 +17,7 @@ const ProfileSection = () => {
 
         <div className="space-y-6 text-left md:col-span-3">
           <div>
-            <h3 className="font-accent text-3xl md:text-5xl pb-4">
+            <h3 className="font-accent text-3xl md:text-5xl py-4">
               Zsuzsa Magyar (on left)
             </h3>
             <p className="text-sm md:text-base">
