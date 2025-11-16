@@ -16,7 +16,7 @@ const ArchiveSection = () => {
             ]}
           />
         </div>
-        <div className="">
+        <div className="ml-auto">
           <h2 className="text-xl md:text-4xl">DOOMERS</h2>
           <p className="text-xl md:text-2xl">A play written by Matthew Gasda</p>
           <a
