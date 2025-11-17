@@ -55,30 +55,42 @@ const MobileProfile = () => {
     <div className="flex flex-col space-y-6">
       <div className="w-full grid grid-cols-2">
         <button onClick={() => setActiveProfile("zsuzsa")} className="">
-          <Image
-            src={
-              activeProfile === "zsuzsa"
-                ? "/images/team/ZUS_ACTIVE.png"
-                : "/images/team/ZUS_INACTIVE.png"
-            }
-            alt="Zsuzsa Profile"
-            width={600}
-            height={400}
-            className="w-full"
-          />
+          {activeProfile === "zsuzsa" ? (
+            <Image
+              src={"/images/team/ZUS_ACTIVE.png"}
+              alt="Zsuzsa Profile"
+              width={600}
+              height={400}
+              className="w-full"
+            />
+          ) : (
+            <Image
+              src={"/images/team/ZUS_INACTIVE.png"}
+              alt="Zsuzsa Profile"
+              width={600}
+              height={400}
+              className="w-full"
+            />
+          )}
         </button>
         <button onClick={() => setActiveProfile("isobel")} className="">
-          <Image
-            src={
-              activeProfile === "isobel"
-                ? "/images/team/ISO_ACTIVE.png"
-                : "/images/team/ISO_INACTIVE.png"
-            }
-            alt="Isobel Profile"
-            width={600}
-            height={400}
-            className="w-full"
-          />
+          {activeProfile === "isobel" ? (
+            <Image
+              src={"/images/team/ISO_ACTIVE.png"}
+              alt="Isobel Profile"
+              width={600}
+              height={400}
+              className="w-full"
+            />
+          ) : (
+            <Image
+              src={"/images/team/ISO_INACTIVE.png"}
+              alt="Isobel Profile"
+              width={600}
+              height={400}
+              className="w-full"
+            />
+          )}
         </button>
       </div>
 
