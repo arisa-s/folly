@@ -93,7 +93,7 @@ const DesktopProfile = () => {
     <div className="text-left grid md:grid-cols-3 gap-8 md:items-center md:mt-24">
       <ZsuzsaProfile />
       <Image
-        src="/images/TEAM.png"
+        src="/images/team/TEAM.png"
         alt="Profile"
         width={600}
         height={400}
