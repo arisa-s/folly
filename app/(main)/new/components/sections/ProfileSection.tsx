@@ -4,21 +4,16 @@ import SectionWrapper from "./components/SectionWrapper";
 const ProfileSection = () => {
   return (
     <SectionWrapper>
-      <div className="md:grid md:grid-cols-5 gap-8 md:gap-12 items-center">
-        <div className="md:col-span-2">
-          <Image
-            src="/images/TEAM.jpg"
-            alt="Profile"
-            width={600}
-            height={400}
-            className="max-w-md h-auto w-full"
-          />
-        </div>
+      <div className="flex flex-col space-y-6 md:space-y-12">
+        <h2>
+          Founded by two women with a lifelong focus on storytelling and
+          collaboration.
+        </h2>
 
-        <div className="space-y-6 text-left md:col-span-3">
+        <div className="text-left grid grid-cols-3 gap-8 items-center mt-12 md:mt-24">
           <div>
-            <h3 className="font-accent text-3xl md:text-5xl py-4">
-              Zsuzsa Magyar (on left)
+            <h3 className="font-accent text-3xl md:text-4xl pb-4">
+              Zsuzsa Magyar
             </h3>
             <p className="text-sm md:text-base">
               Zsuzsa Magyar is a filmmaker, theatre director, and producer whose
@@ -35,9 +30,16 @@ const ProfileSection = () => {
               and a deep love of performance to all her work.
             </p>
           </div>
+          <Image
+            src="/images/TEAM.png"
+            alt="Profile"
+            width={600}
+            height={400}
+            className="max-w-lg h-auto w-full"
+          />
           <div>
-            <h3 className="font-accent text-3xl md:text-5xl pb-4">
-              Isobel McCrum (on right)
+            <h3 className="font-accent text-3xl md:text-4xl pb-4">
+              Isobel McCrum
             </h3>
             <p className="text-sm md:text-base">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -50,10 +52,7 @@ const ProfileSection = () => {
             <p className="text-sm md:text-base">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
               dapibus erat non facilisis accumsan. Cras vestibulum bibendum
-              gravida. Morbi gravida suscipit maximus. Aliquam bibendum nunc id
-              mi blandit ullamcorper. Morbi semper cursus felis eget laoreet.
-              Nam porta sed est quis interdum. Morbi quis mi iaculis leo lacinia
-              consectetur.
+              gravida.
             </p>
           </div>
         </div>

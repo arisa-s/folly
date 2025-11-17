@@ -3,11 +3,12 @@ import SectionWrapper from "./components/SectionWrapper";
 const AboutSection = () => {
   return (
     <SectionWrapper>
-      We’re a production company founded by two women with a lifelong focus on
-      storytelling and collaboration. <br />
+      Folly Productions is an independent theatre and film company developing
+      work that is bold, character-driven, and unafraid to push into
+      the&nbsp;unknown. <br />
       <br />
       We believe in working with clarity, structure and purpose — with a team
-      that shares our vision.
+      that shares our&nbsp;vision.
     </SectionWrapper>
   );
 };
