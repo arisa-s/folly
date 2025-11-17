@@ -281,11 +281,10 @@ export default function Page() {
         </motion.div>
       )}
 
-      {/* Foreground text color wrapper for smooth color transition (no remount) */}
-      <motion.div
-        animate={{ color: current.fg }}
-        transition={{ duration: 0.4 }}
+      {/* Foreground text color wrapper for synchronized color transition */}
+      <div
         className="relative"
+        style={{ color: current.fg, transition: "color 0.4s ease" }}
       >
         {/* Scroll container with CSS snap - uses window scroll on mobile */}
         <div className="snap-y snap-mandatory">
@@ -308,7 +307,7 @@ export default function Page() {
             </section>
           ))}
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
