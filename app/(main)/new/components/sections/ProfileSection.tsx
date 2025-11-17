@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import SectionWrapper from "./components/SectionWrapper";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 const ZsuzsaProfile = () => {
   return (
@@ -47,51 +47,68 @@ const IsobelProfile = () => {
   );
 };
 
-const MobileProfile = () => {
-  const [activeProfile, setActiveProfile] = useState<"zsuzsa" | "isobel">(
-    "zsuzsa"
+type ProfileKey = "zsuzsa" | "isobel";
+
+const MobileProfile = ({
+  activeProfile,
+  onSelectProfile,
+}: {
+  activeProfile: ProfileKey;
+  onSelectProfile: (profile: ProfileKey) => void;
+}) => {
+  const profileButtons: {
+    id: ProfileKey;
+    activeSrc: string;
+    inactiveSrc: string;
+    alt: string;
+    label: string;
+  }[] = useMemo(
+    () => [
+      {
+        id: "zsuzsa",
+        activeSrc: "/images/team/ZUS_ACTIVE.png",
+        inactiveSrc: "/images/team/ZUS_INACTIVE.png",
+        alt: "Zsuzsa Profile",
+        label: "Show Zsuzsa's profile",
+      },
+      {
+        id: "isobel",
+        activeSrc: "/images/team/ISO_ACTIVE.png",
+        inactiveSrc: "/images/team/ISO_INACTIVE.png",
+        alt: "Isobel Profile",
+        label: "Show Isobel's profile",
+      },
+    ],
+    []
   );
+
   return (
     <div className="flex flex-col space-y-6">
-      <div className="w-full grid grid-cols-2">
-        <button onClick={() => setActiveProfile("zsuzsa")} className="">
-          {activeProfile === "zsuzsa" ? (
-            <Image
-              src={"/images/team/ZUS_ACTIVE.png"}
-              alt="Zsuzsa Profile"
-              width={60}
-              height={40}
-              className="w-full"
-            />
-          ) : (
-            <Image
-              src={"/images/team/ZUS_INACTIVE.png"}
-              alt="Zsuzsa Profile"
-              width={60}
-              height={40}
-              className="w-full"
-            />
-          )}
-        </button>
-        <button onClick={() => setActiveProfile("isobel")} className="">
-          {activeProfile === "isobel" ? (
-            <Image
-              src={"/images/team/ISO_ACTIVE.png"}
-              alt="Isobel Profile"
-              width={60}
-              height={40}
-              className="w-full"
-            />
-          ) : (
-            <Image
-              src={"/images/team/ISO_INACTIVE.png"}
-              alt="Isobel Profile"
-              width={60}
-              height={40}
-              className="w-full"
-            />
-          )}
-        </button>
+      <div className="w-full grid grid-cols-2 gap-3">
+        {profileButtons.map(({ id, activeSrc, inactiveSrc, alt, label }) => {
+          const isActive = activeProfile === id;
+          return (
+            <button
+              key={id}
+              type="button"
+              aria-pressed={isActive}
+              aria-label={label}
+              onClick={() => onSelectProfile(id)}
+              className={`transition focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black ${
+                isActive ? "opacity-100" : "opacity-60"
+              }`}
+            >
+              <Image
+                src={isActive ? activeSrc : inactiveSrc}
+                alt={alt}
+                width={600}
+                height={400}
+                className="w-full"
+                priority={id === "zsuzsa"}
+              />
+            </button>
+          );
+        })}
       </div>
 
       <div>
@@ -119,6 +136,8 @@ const DesktopProfile = () => {
 };
 
 const ProfileSection = () => {
+  const [activeProfile, setActiveProfile] = useState<ProfileKey>("zsuzsa");
+
   return (
     <SectionWrapper>
       <div className="flex flex-col space-y-6 md:space-y-12">
@@ -127,7 +146,10 @@ const ProfileSection = () => {
           and&nbsp;collaboration.
         </h2>
         <div className="block md:hidden">
-          <MobileProfile />
+          <MobileProfile
+            activeProfile={activeProfile}
+            onSelectProfile={setActiveProfile}
+          />
         </div>
         <div className="hidden md:block">
           <DesktopProfile />
