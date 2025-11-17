@@ -59,16 +59,16 @@ const MobileProfile = () => {
             <Image
               src={"/images/team/ZUS_ACTIVE.png"}
               alt="Zsuzsa Profile"
-              width={600}
-              height={400}
+              width={60}
+              height={40}
               className="w-full"
             />
           ) : (
             <Image
               src={"/images/team/ZUS_INACTIVE.png"}
               alt="Zsuzsa Profile"
-              width={600}
-              height={400}
+              width={60}
+              height={40}
               className="w-full"
             />
           )}
@@ -78,16 +78,16 @@ const MobileProfile = () => {
             <Image
               src={"/images/team/ISO_ACTIVE.png"}
               alt="Isobel Profile"
-              width={600}
-              height={400}
+              width={60}
+              height={40}
               className="w-full"
             />
           ) : (
             <Image
               src={"/images/team/ISO_INACTIVE.png"}
               alt="Isobel Profile"
-              width={600}
-              height={400}
+              width={60}
+              height={40}
               className="w-full"
             />
           )}
