@@ -295,7 +295,7 @@ export default function Page() {
               ref={(el) => {
                 sectionRefs.current[i] = el;
               }}
-              className="snap-start h-screen w-full grid place-items-center px-4 md:px-6"
+              className="snap-start h-screen w-full grid place-items-center"
             >
               <div className="relative z-10 w-full min-h-full grid place-items-center py-8 md:py-0">
                 {s.component}
