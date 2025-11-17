@@ -1,68 +1,139 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-
-const responsive = {
-  superLargeDesktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 3000 },
-    items: 5,
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 3,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 3,
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 3,
-  },
-};
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 export interface FollyCarouselProps {
   images: {
     src: string;
     alt: string;
   }[];
+  maxHeight?: number | string;
 }
 
-export default function FollyCarousel({ images }: FollyCarouselProps) {
-  const width = 1249;
-  const height = 1740;
+const MOBILE_BREAKPOINT = 768;
+const DESKTOP_SLIDES = 2.35; // 2 full cards + partial third
+const MOBILE_SLIDES = 1.35; // 1 full card + partial second
+
+export default function FollyCarousel({
+  images,
+  maxHeight,
+}: FollyCarouselProps) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [slidesPerView, setSlidesPerView] = useState(DESKTOP_SLIDES);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(true);
+
+  const resolvedMaxHeight =
+    typeof maxHeight === "number" ? `${maxHeight}px` : maxHeight;
+
+  const slideBasis = useMemo(
+    () => `${(1 / slidesPerView) * 100}%`,
+    [slidesPerView]
+  );
+
+  const updateSlidesPerView = useCallback(() => {
+    if (typeof window === "undefined") return;
+    setSlidesPerView(
+      window.innerWidth < MOBILE_BREAKPOINT ? MOBILE_SLIDES : DESKTOP_SLIDES
+    );
+  }, []);
+
+  const updateArrowState = useCallback(() => {
+    const node = trackRef.current;
+    if (!node) return;
+    const maxScrollLeft = node.scrollWidth - node.clientWidth;
+    setCanScrollPrev(node.scrollLeft > 8);
+    setCanScrollNext(maxScrollLeft > 0 && node.scrollLeft < maxScrollLeft - 8);
+  }, []);
+
+  useEffect(() => {
+    updateSlidesPerView();
+    window.addEventListener("resize", updateSlidesPerView);
+    return () => window.removeEventListener("resize", updateSlidesPerView);
+  }, [updateSlidesPerView]);
+
+  useEffect(() => {
+    const node = trackRef.current;
+    if (!node) return;
+    const handleScroll = () => updateArrowState();
+    updateArrowState();
+    node.addEventListener("scroll", handleScroll, { passive: true });
+    return () => node.removeEventListener("scroll", handleScroll);
+  }, [updateArrowState, slidesPerView, images.length]);
+
+  const scrollByOneSlide = useCallback(
+    (direction: "prev" | "next") => {
+      const node = trackRef.current;
+      if (!node) return;
+      const scrollAmount =
+        (node.clientWidth / slidesPerView) * (direction === "next" ? 1 : -1);
+      node.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    },
+    [slidesPerView]
+  );
+
+  if (!images?.length) {
+    return null;
+  }
 
   return (
-    <div className="overflow-hidden">
-      {/* Main Content */}
-      <Carousel
-        responsive={responsive}
-        draggable
-        swipeable
-        arrows
-        customTransition="transform 500ms ease-in-out"
-        className="-mx-4 md:-mx-24"
-        infinite
-        focusOnSelect={true}
+    <div className="relative w-full" style={{ maxHeight: resolvedMaxHeight }}>
+      <div
+        ref={trackRef}
+        className="flex gap-4 md:gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory px-4 md:px-8"
+        style={{
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+          maxHeight: resolvedMaxHeight,
+        }}
       >
         {images.map((image, index) => (
-          <div key={index} className={`md:m-6 m-1 transition-all duration-500`}>
-            <div className="w-full max-w-[300px] md:max-w-none mx-auto">
+          <div
+            key={`${image.src}-${index}`}
+            className="snap-start shrink-0 overflow-hidden bg-neutral-200"
+            style={{
+              flexBasis: slideBasis,
+              maxHeight: resolvedMaxHeight,
+            }}
+          >
+            <div
+              className="relative aspect-3/4 w-full"
+              style={{ maxHeight: resolvedMaxHeight }}
+            >
               <Image
-                alt={image.alt || "Defa Image"}
                 src={image.src}
-                width={width}
-                height={height}
-                className="w-full h-auto max-h-[60vh] md:max-h-none object-contain"
+                alt={image.alt}
+                fill
+                sizes="(max-width: 768px) 80vw, 30vw"
+                className="h-full w-full object-cover"
+                priority={index === 0}
               />
             </div>
           </div>
         ))}
-      </Carousel>
+      </div>
+
+      <div className="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center justify-between px-2 md:px-6">
+        <button
+          type="button"
+          aria-label="Previous photo"
+          onClick={() => scrollByOneSlide("prev")}
+          disabled={!canScrollPrev}
+          className="cursor-pointer inline-flex h-10 w-10 items-center justify-center text-white transition disabled:hidden md:h-12 md:w-12"
+        >
+          <span aria-hidden>&larr;</span>
+        </button>
+        <button
+          type="button"
+          aria-label="Next photo"
+          onClick={() => scrollByOneSlide("next")}
+          disabled={!canScrollNext}
+          className="cursor-pointer inline-flex h-10 w-10 items-center justify-center text-white transition disabled:hidden md:h-12 md:w-12"
+        >
+          <span aria-hidden>&rarr;</span>
+        </button>
+      </div>
     </div>
   );
 }
