@@ -1,6 +1,6 @@
 import RunningHorse from "@/app/components/RunningHorse";
 
-const FooterSection = () => {
+const Footer = () => {
   return (
     <footer>
       <RunningHorse />
@@ -22,4 +22,4 @@ const FooterSection = () => {
   );
 };
 
-export default FooterSection;
+export default Footer;

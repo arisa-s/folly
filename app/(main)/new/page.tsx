@@ -9,7 +9,6 @@ import AboutSection from "./components/sections/AboutSection";
 import ArchiveSection from "./components/sections/ArchiveSection";
 import ProfileSection from "./components/sections/ProfileSection";
 import ContactSection from "./components/sections/ContactSection";
-import FooterSection from "./components/sections/FooterSection";
 import { FOLLY_COLORS } from "@/public/colors";
 import BackgroundColorLayer from "./components/BackgroundColorLayer";
 import HamburgerMenu from "./components/HamburgerMenu";
@@ -305,17 +304,6 @@ export default function Page() {
           ))}
         </div>
       </motion.div>
-
-      {/* Footer - outside snap container */}
-      <motion.footer
-        className="relative w-full"
-        style={{
-          backgroundColor: sections[sections.length - 1].bg,
-          color: sections[sections.length - 1].fg,
-        }}
-      >
-        <FooterSection />
-      </motion.footer>
     </div>
   );
 }
