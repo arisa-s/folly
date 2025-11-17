@@ -6,7 +6,9 @@ import { useState } from "react";
 const ZsuzsaProfile = () => {
   return (
     <div className="text-left md:text-left">
-      <h3 className="font-accent text-2xl md:text-4xl pb-4">Zsuzsa Magyar</h3>
+      <h3 className="font-accent text-2xl md:text-4xl md:pb-4">
+        Zsuzsa Magyar
+      </h3>
       <p className="text-sm md:text-base">
         Zsuzsa Magyar is a filmmaker, theatre director, and producer whose work
         moves between film, theatre, and documentary. She recently directed the

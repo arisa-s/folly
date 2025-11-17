@@ -7,7 +7,7 @@ export default function SectionWrapper({
 }) {
   return (
     <div
-      className={`max-w-8xl w-full pr-2 pl-12 md:pl-36 ml-auto space-y-6 md:space-y-16 flex flex-col text-right text-2xl md:text-6xl font-secondary ${className}`}
+      className={`max-w-8xl w-full pr-2 md:pr-9 pl-18 md:pl-36 ml-auto space-y-6 md:space-y-16 flex flex-col text-right text-2xl md:text-6xl font-secondary ${className}`}
     >
       {children}
     </div>

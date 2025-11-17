@@ -13,6 +13,7 @@ interface HamburgerMenuProps {
   active: number;
   onSelect: (index: number) => void;
   textColor: string;
+  bgColor: string;
 }
 
 export default function HamburgerMenu({
@@ -20,6 +21,7 @@ export default function HamburgerMenu({
   active,
   onSelect,
   textColor,
+  bgColor,
 }: HamburgerMenuProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -50,13 +52,21 @@ export default function HamburgerMenu({
         {menuOpen && (
           <motion.div
             aria-label="Section menu"
-            className="fixed inset-0 z-[100] bg-white backdrop-blur-md backdrop-filter"
+            className="fixed inset-0 z-[100 backdrop-blur-md backdrop-filter"
+            style={{ backgroundColor: bgColor, backdropFilter: "blur(10px)" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
             <div className="flex h-full items-center justify-center">
+              <button
+                style={{ color: textColor }}
+                onClick={() => setMenuOpen(false)}
+                className="absolute top-10 md:top-8 right-4 md:right-8 text-3xl md:text-5xl cursor-pointer"
+              >
+                ✕
+              </button>
               <ul className="space-y-4 text-center">
                 {sections.map((s, i) => (
                   <li key={s.id}>
@@ -66,9 +76,12 @@ export default function HamburgerMenu({
                         setMenuOpen(false);
                       }}
                       className={`block w-full px-8 py-4 text-xl md:text-2xl hover:opacity-70 transition-opacity ${
-                        i === active ? "font-semibold" : "font-normal"
-                      }`}
-                      style={{ color: textColor }}
+                        i === active ? "font-accent" : "font-secondary"
+                      } ${s.id === "hero" ? "hidden" : ""}`}
+                      style={{
+                        color: textColor,
+                        opacity: i === active ? 1 : 0.5,
+                      }}
                     >
                       {s.title || s.id}
                     </button>

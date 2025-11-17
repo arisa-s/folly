@@ -1,13 +1,11 @@
 "use client";
 
-import Image from "next/image";
-import { motion } from "framer-motion";
 import SectionWrapper from "./components/SectionWrapper";
 import Footer from "./Footer";
 
 const ContactSection = () => {
   return (
-    <SectionWrapper className="text-xl md:text-7xl h-full pt-12 md:pt-24">
+    <SectionWrapper className="text-xl md:text-7xl h-full">
       <div className="grid grid-rows-3 h-full">
         <div />
         <div className="flex flex-col">

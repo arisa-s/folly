@@ -211,6 +211,7 @@ export default function Page() {
         active={active}
         onSelect={scrollTo}
         textColor={current.fg}
+        bgColor={current.bg}
       />
 
       {/* Dot indicator (interactive) */}
@@ -297,7 +298,7 @@ export default function Page() {
               }}
               className="snap-start h-screen w-full grid place-items-center"
             >
-              <div className="relative z-10 w-full min-h-full grid place-items-center py-8 md:py-0">
+              <div className="relative z-10 w-full min-h-full grid place-items-center">
                 {s.component}
               </div>
             </section>

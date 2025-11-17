@@ -24,6 +24,8 @@ export default function FollyCarousel({
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(true);
 
+  console.log({ canScrollPrev });
+
   const resolvedMaxHeight =
     typeof maxHeight === "number" ? `${maxHeight}px` : maxHeight;
 
@@ -43,8 +45,18 @@ export default function FollyCarousel({
     const node = trackRef.current;
     if (!node) return;
     const maxScrollLeft = node.scrollWidth - node.clientWidth;
-    setCanScrollPrev(node.scrollLeft > 8);
-    setCanScrollNext(maxScrollLeft > 0 && node.scrollLeft < maxScrollLeft - 8);
+    const prevValue = maxScrollLeft > 0 && node.scrollLeft > 8;
+    const nextValue = maxScrollLeft > 0 && node.scrollLeft < maxScrollLeft - 8;
+    console.log("updateArrowState", {
+      scrollLeft: node.scrollLeft,
+      maxScrollLeft,
+      scrollWidth: node.scrollWidth,
+      clientWidth: node.clientWidth,
+      prevValue,
+      nextValue,
+    });
+    setCanScrollPrev(prevValue);
+    setCanScrollNext(nextValue);
   }, []);
 
   useEffect(() => {
@@ -114,25 +126,29 @@ export default function FollyCarousel({
         ))}
       </div>
 
-      <div className="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center justify-between px-2 md:px-6">
-        <button
-          type="button"
-          aria-label="Previous photo"
-          onClick={() => scrollByOneSlide("prev")}
-          disabled={!canScrollPrev}
-          className="cursor-pointer inline-flex h-10 w-10 items-center justify-center text-white transition disabled:hidden md:h-12 md:w-12"
-        >
-          <span aria-hidden>&larr;</span>
-        </button>
-        <button
-          type="button"
-          aria-label="Next photo"
-          onClick={() => scrollByOneSlide("next")}
-          disabled={!canScrollNext}
-          className="cursor-pointer inline-flex h-10 w-10 items-center justify-center text-white transition disabled:hidden md:h-12 md:w-12"
-        >
-          <span aria-hidden>&rarr;</span>
-        </button>
+      <div className="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center px-2 md:px-6">
+        {canScrollPrev ? (
+          <button
+            type="button"
+            aria-label="Previous photo"
+            disabled={!canScrollPrev}
+            onClick={() => scrollByOneSlide("prev")}
+            className="pointer-events-auto cursor-pointer inline-flex h-10 w-10 items-center justify-center text-white transition md:h-12 md:w-12"
+          >
+            <span aria-hidden>⟵</span>
+          </button>
+        ) : null}
+        {canScrollNext ? (
+          <button
+            type="button"
+            aria-label="Next photo"
+            onClick={() => scrollByOneSlide("next")}
+            disabled={!canScrollNext}
+            className="pointer-events-auto cursor-pointer inline-flex h-10 w-10 items-center justify-center text-white transition disabled:opacity-30 md:h-12 md:w-12 ml-auto"
+          >
+            <span aria-hidden>⟶</span>
+          </button>
+        ) : null}
       </div>
     </div>
   );

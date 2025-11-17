@@ -6,7 +6,7 @@ const ArchiveSection = () => {
   return (
     <SectionWrapper className="py-4 md:py-0">
       <div className="w-full flex flex-col items-start gap-4">
-        <div className="w-full max-w-5xl ml-auto">
+        <div className="w-full max-w-5xl ml-auto -mr-2 md:-mr-9">
           <FollyCarousel
             images={[
               { src: "/images/doomers/DOOMERS_4.avif", alt: "Doomers" },
