@@ -296,9 +296,13 @@ export default function Page() {
               ref={(el) => {
                 sectionRefs.current[i] = el;
               }}
-              className="snap-start h-screen w-full grid place-items-center"
+              className="snap-start h-screen w-full grid "
             >
-              <div className="relative z-10 w-full min-h-full grid place-items-center">
+              <div
+                className={`relative z-10 w-full min-h-full grid ${
+                  s.id === "archive" ? "" : "place-items-center"
+                }`}
+              >
                 {s.component}
               </div>
             </section>
