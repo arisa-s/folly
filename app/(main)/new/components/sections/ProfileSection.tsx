@@ -51,11 +51,18 @@ const MobileProfile = () => {
   const [activeProfile, setActiveProfile] = useState<"zsuzsa" | "isobel">(
     "zsuzsa"
   );
+
   return (
     <div className="flex flex-col space-y-6">
-      <div className="w-full grid grid-cols-2">
-        <button onClick={() => setActiveProfile("zsuzsa")} className="">
+      <div className="w-full grid grid-cols-2 gap-2">
+        <button
+          onClick={() => setActiveProfile("zsuzsa")}
+          className="relative"
+          aria-pressed={activeProfile === "zsuzsa"}
+          type="button"
+        >
           <Image
+            key={`zsuzsa-${activeProfile === "zsuzsa" ? "active" : "inactive"}`}
             src={
               activeProfile === "zsuzsa"
                 ? "/images/team/ZUS_ACTIVE.png"
@@ -65,10 +72,17 @@ const MobileProfile = () => {
             width={600}
             height={400}
             className="w-full"
+            priority
           />
         </button>
-        <button onClick={() => setActiveProfile("isobel")} className="">
+        <button
+          onClick={() => setActiveProfile("isobel")}
+          className="relative"
+          aria-pressed={activeProfile === "isobel"}
+          type="button"
+        >
           <Image
+            key={`isobel-${activeProfile === "isobel" ? "active" : "inactive"}`}
             src={
               activeProfile === "isobel"
                 ? "/images/team/ISO_ACTIVE.png"
@@ -78,6 +92,7 @@ const MobileProfile = () => {
             width={600}
             height={400}
             className="w-full"
+            priority
           />
         </button>
       </div>

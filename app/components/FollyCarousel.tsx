@@ -22,7 +22,8 @@ export default function FollyCarousel({
   const trackRef = useRef<HTMLDivElement>(null);
   const [slidesPerView, setSlidesPerView] = useState(DESKTOP_SLIDES);
   const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(true);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   console.log({ canScrollPrev });
 
@@ -66,6 +67,7 @@ export default function FollyCarousel({
   }, [updateSlidesPerView]);
 
   useEffect(() => {
+    setMounted(true);
     const node = trackRef.current;
     if (!node) return;
     const handleScroll = () => updateArrowState();
@@ -126,30 +128,32 @@ export default function FollyCarousel({
         ))}
       </div>
 
-      <div className="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center px-2 md:px-6">
-        {canScrollPrev ? (
-          <button
-            type="button"
-            aria-label="Previous photo"
-            disabled={!canScrollPrev}
-            onClick={() => scrollByOneSlide("prev")}
-            className="pointer-events-auto cursor-pointer inline-flex h-10 w-10 items-center justify-center text-white transition md:h-12 md:w-12"
-          >
-            <span aria-hidden>⟵</span>
-          </button>
-        ) : null}
-        {canScrollNext ? (
-          <button
-            type="button"
-            aria-label="Next photo"
-            onClick={() => scrollByOneSlide("next")}
-            disabled={!canScrollNext}
-            className="pointer-events-auto cursor-pointer inline-flex h-10 w-10 items-center justify-center text-white transition disabled:opacity-30 md:h-12 md:w-12 ml-auto"
-          >
-            <span aria-hidden>⟶</span>
-          </button>
-        ) : null}
-      </div>
+      {mounted && (
+        <div className="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center px-2 md:px-6">
+          {canScrollPrev ? (
+            <button
+              type="button"
+              aria-label="Previous photo"
+              disabled={!canScrollPrev}
+              onClick={() => scrollByOneSlide("prev")}
+              className="pointer-events-auto cursor-pointer inline-flex h-10 w-10 items-center justify-center text-white transition md:h-12 md:w-12"
+            >
+              <span aria-hidden>⟵</span>
+            </button>
+          ) : null}
+          {canScrollNext ? (
+            <button
+              type="button"
+              aria-label="Next photo"
+              onClick={() => scrollByOneSlide("next")}
+              disabled={!canScrollNext}
+              className="pointer-events-auto cursor-pointer inline-flex h-10 w-10 items-center justify-center text-white transition disabled:opacity-30 md:h-12 md:w-12 ml-auto"
+            >
+              <span aria-hidden>⟶</span>
+            </button>
+          ) : null}
+        </div>
+      )}
     </div>
   );
 }
