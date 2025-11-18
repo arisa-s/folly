@@ -99,7 +99,7 @@ const MobileProfile = ({
               }`}
             >
               <Image
-                src={isActive ? activeSrc : inactiveSrc}
+                src={activeSrc}
                 alt={alt}
                 width={600}
                 height={400}
