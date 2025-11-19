@@ -9,13 +9,7 @@ const Footer = () => {
           Based between London and New York
         </div>
         <div>
-          <div className="flex md:flex-row items-start md:items-center gap-4 md:gap-6 ml-auto md:ml-0 py-4 md:py-6">
-            <div className="text-sm md:text-lg text-center md:text-right">
-              <p>Folly productions limited</p>
-              <p>9 st Quintin</p>
-              <p>W10 6NX</p>
-            </div>
-          </div>
+          <div className="flex md:flex-row items-start md:items-center gap-4 md:gap-6 ml-auto md:ml-0 py-4 md:py-6"></div>
         </div>
       </div>
     </footer>

@@ -10,17 +10,13 @@ const ZsuzsaProfile = () => {
         Zsuzsa Magyar
       </h3>
       <p className="text-sm md:text-base">
-        Zsuzsa Magyar is a filmmaker, theatre director, and producer whose work
-        moves between film, theatre, and documentary. She recently directed the
-        UK premiere of Doomers by Matthew Gasda at the Rose Lipman Building. Her
-        experience includes collaborations with high-profile directors and
-        producers across major film, television, and theatre projects, and she
-        has worked internationally in London, New York, and Los Angeles.
-      </p>
-      <p className="text-sm md:text-base">
-        Zsuzsa studied Language and Culture at University College London and
-        trained at MetFilm School, bringing a sharp visual sensibility and a
-        deep love of performance to all her work.
+        Zsuzsa Magyar is is a filmmaker, theatre director, and producer whose
+        work moves between narrative film, documentary, and performance. She has
+        collaborated with leading directors and producers across major
+        international film, television, and theatre projects, working between
+        London, New York, and Los Angeles. She studied Language and Culture at
+        University College London and trained at MetFilm School, bringing a
+        sharp visual sensibility and a deep love of performance to all her work.
       </p>
     </div>
   );
@@ -33,15 +29,13 @@ const IsobelProfile = () => {
         Isobel McCrum
       </h3>
       <p className="text-sm md:text-base">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dapibus
-        erat non facilisis accumsan. Cras vestibulum bibendum gravida. Morbi
-        gravida suscipit maximus. Aliquam bibendum nunc id mi blandit
-        ullamcorper. Morbi semper cursus felis eget laoreet. Nam porta sed est
-        quis interdum. Morbi quis mi iaculis leo lacinia consectetur.
-      </p>
-      <p className="text-sm md:text-base">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dapibus
-        erat non facilisis accumsan. Cras vestibulum bibendum gravida.
+        Isobel McCrum is a producer and technologist whose practice spans
+        creative development and systems design. She has produced theatre and
+        film projects and spent several years on the Ivy Film Festival
+        committee. Her work in AI systems architecture informs her approach to
+        storytelling, with a focus on the intersection of applied science,
+        governance, and design. A graduate of Brown University, she has
+        published and spoken widely on AI and creativity.
       </p>
     </div>
   );
