@@ -33,7 +33,7 @@ const HeroSection = () => {
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
             onClick={scrollToAbout}
-            className="absolute bottom-8 md:bottom-12 px-6 py-3 md:px-8 md:py-4  rounded-full text-white text-3xl animate-bounce hover:bg-white/20 transition-all duration-300 cursor-pointer z-20"
+            className="absolute bottom-8 md:bottom-12 px-6 py-3 md:px-8 md:py-4 rounded-full text-white text-3xl  hover:bg-white/20 transition-all duration-300 cursor-pointer z-20"
             aria-label="Scroll to about section"
           >
             ↓

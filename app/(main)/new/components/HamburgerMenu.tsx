@@ -75,9 +75,11 @@ export default function HamburgerMenu({
                         onSelect(i);
                         setMenuOpen(false);
                       }}
-                      className={`block w-full px-8 py-4 text-xl md:text-2xl hover:opacity-70 transition-opacity ${
-                        i === active ? "font-accent" : "font-secondary"
-                      } ${s.id === "hero" ? "hidden" : ""}`}
+                      className={`block w-full px-8 py-4 text-xl md:text-2xl lg:text-3xl xl:text-4xl hover:opacity-70 transition-opacity cursor-pointer ${
+                        i === active
+                          ? "font-bold font-accent"
+                          : "font-normal font-secondary"
+                      } ${s.id === "profile" ? "hidden" : ""}`}
                       style={{
                         color: textColor,
                         opacity: i === active ? 1 : 0.5,

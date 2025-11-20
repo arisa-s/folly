@@ -28,14 +28,14 @@ export default function RunningHorse() {
             ease: "easeInOut",
           },
         }}
-        className="absolute top-0 left-0"
+        className="absolute bottom-0 left-0"
       >
         <Image
           src="/images/logo/FOLLY_HORSE.png"
           alt="Folly Symbol"
           width={500}
-          height={500}
-          className="p-2 w-24 h-24 md:w-32 md:h-32"
+          height={300}
+          className="p-2 w-24 h-auto md:w-32 md:h-auto"
         />
       </motion.div>
     </div>

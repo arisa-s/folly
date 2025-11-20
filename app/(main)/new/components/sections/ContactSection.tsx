@@ -5,7 +5,7 @@ import Footer from "./Footer";
 
 const ContactSection = () => {
   return (
-    <SectionWrapper className="text-xl md:text-4xl lg:text-7xl h-full">
+    <SectionWrapper className="text-xl sm:text-4xl md:text-5xl lg:text-7xl h-full">
       <div className="grid grid-rows-3 h-full">
         <div />
         <div className="flex flex-col">

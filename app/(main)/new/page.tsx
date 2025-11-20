@@ -21,29 +21,29 @@ export default function Page() {
         {
           id: "hero",
           component: <HeroSection />,
-          title: "Hero",
+          title: "Home",
           bg: "#000000",
           fg: FOLLY_COLORS.white,
         },
         {
           id: "about",
           component: <AboutSection />,
-          title: "About us",
+          title: "About",
           bg: FOLLY_COLORS.red,
           fg: FOLLY_COLORS.blue,
+        },
+        {
+          id: "profile",
+          component: <ProfileSection />,
+          title: "About",
+          bg: FOLLY_COLORS.yellow, // gray-800
+          fg: FOLLY_COLORS.black,
         },
         {
           id: "archive",
           component: <ArchiveSection />,
           title: "Recent Work",
           bg: FOLLY_COLORS.blue, // teal-700
-          fg: FOLLY_COLORS.black,
-        },
-        {
-          id: "profile",
-          component: <ProfileSection />,
-          title: "Meet us",
-          bg: FOLLY_COLORS.yellow, // gray-800
           fg: FOLLY_COLORS.black,
         },
         {
@@ -295,11 +295,13 @@ export default function Page() {
               ref={(el) => {
                 sectionRefs.current[i] = el;
               }}
-              className="snap-start h-screen w-full grid "
+              className={`snap-start w-full grid h-screen`}
             >
               <div
                 className={`relative z-10 w-full min-h-full grid ${
-                  s.id === "archive" ? "" : "place-items-center"
+                  s.id === "archive"
+                    ? "place-items-center md:place-items-end"
+                    : "place-items-center"
                 }`}
               >
                 {s.component}
