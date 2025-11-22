@@ -24,6 +24,7 @@ export default function Page() {
           title: "Home",
           bg: "#000000",
           fg: FOLLY_COLORS.white,
+          accent: FOLLY_COLORS.red,
         },
         {
           id: "about",
@@ -31,13 +32,15 @@ export default function Page() {
           title: "About",
           bg: FOLLY_COLORS.red,
           fg: FOLLY_COLORS.blue,
+          accent: FOLLY_COLORS.yellow,
         },
         {
           id: "profile",
           component: <ProfileSection />,
-          title: "About",
+          title: "Team",
           bg: FOLLY_COLORS.yellow, // gray-800
           fg: FOLLY_COLORS.black,
+          accent: FOLLY_COLORS.red,
         },
         {
           id: "archive",
@@ -45,6 +48,7 @@ export default function Page() {
           title: "Recent Work",
           bg: FOLLY_COLORS.blue, // teal-700
           fg: FOLLY_COLORS.black,
+          accent: FOLLY_COLORS.yellow,
         },
         {
           id: "contact",
@@ -52,12 +56,14 @@ export default function Page() {
           title: "Contact",
           bg: FOLLY_COLORS.white,
           fg: FOLLY_COLORS.black,
+          accent: FOLLY_COLORS.blue,
         },
       ] as Array<{
         id: string;
         title: string;
         bg: string;
         fg: string;
+        accent: string;
         component?: React.ReactNode;
       }>,
     []
@@ -269,7 +275,7 @@ export default function Page() {
             <motion.h2
               key={current.id}
               className="text-sm md:text-xl font-accent"
-              style={{ color: current.fg }}
+              style={{ color: current.accent }}
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 10 }}

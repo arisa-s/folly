@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import VideoBackground from "../VideoBackground";
+import Image from "next/image";
 
 const HeroSection = () => {
   const [showButton, setShowButton] = useState(false);
@@ -33,9 +34,16 @@ const HeroSection = () => {
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
             onClick={scrollToAbout}
-            className="absolute bottom-8 md:bottom-12 px-6 py-3 md:px-8 md:py-4 rounded-full text-white text-3xl  hover:bg-white/20 transition-all duration-300 cursor-pointer z-20"
+            className="absolute bottom-8 md:bottom-12 px-6 py-3 md:px-8 md:py-4  text-white text-3xl animate-bounce transition-all duration-300 cursor-pointer z-20"
             aria-label="Scroll to about section"
           >
+            <Image
+              src="/images/logo/FOLLY_SYMBOL_WHITE_CMYK.png"
+              alt="Folly Horse"
+              className="w-10 h-10"
+              width={100}
+              height={100}
+            />
             ↓
           </motion.button>
         )}

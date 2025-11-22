@@ -4,7 +4,7 @@ const AboutSection = () => {
   return (
     <SectionWrapper className="">
       Folly Productions is an independent theatre and film company developing
-      work that is bold, character-driven, and unafaird to push boundaries.
+      work that is bold, character-driven, and unafraid to push boundaries.
       <br />
       <br />
       We believe in working with clarity, structure and purpose, with teams that

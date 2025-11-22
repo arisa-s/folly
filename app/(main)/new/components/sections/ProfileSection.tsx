@@ -5,11 +5,11 @@ import { useState, useMemo } from "react";
 
 const ZsuzsaProfile = () => {
   return (
-    <div className="text-left md:text-left">
-      <h3 className="font-secondary text-2xl md:text-4xl md:pb-4">
+    <div className="text-left lg:text-left">
+      <h3 className="font-secondary text-2xl lg:text-4xl lg:pb-4">
         Zsuzsa Magyar
       </h3>
-      <p className="text-sm md:text-base">
+      <p className="text-sm lg:text-base">
         Zsuzsa Magyar is is a filmmaker, theatre director, and producer whose
         work moves between narrative film, documentary, and performance. She has
         collaborated with leading directors and producers across major
@@ -24,11 +24,11 @@ const ZsuzsaProfile = () => {
 
 const IsobelProfile = () => {
   return (
-    <div className="text-right md:text-left">
-      <h3 className="font-secondary text-2xl md:text-4xl md:pb-4">
+    <div className="text-right lg:text-left">
+      <h3 className="font-secondary text-2xl lg:text-4xl lg:pb-4">
         Isobel McCrum
       </h3>
-      <p className="text-sm md:text-base">
+      <p className="text-sm lg:text-base">
         Isobel McCrum is a producer and technologist whose practice spans
         creative development and systems design. She has produced theatre and
         film projects and spent several years on the Ivy Film Festival
@@ -78,7 +78,7 @@ const MobileProfile = ({
 
   return (
     <div className="flex flex-col space-y-6">
-      <div className="w-full grid grid-cols-2 gap-3">
+      <div className="w-full grid grid-cols-2 max-w-sm mx-auto">
         {profileButtons.map(({ id, activeSrc, inactiveSrc, alt, label }) => {
           const isActive = activeProfile === id;
           return (
@@ -89,7 +89,7 @@ const MobileProfile = ({
               aria-label={label}
               onClick={() => onSelectProfile(id)}
               className={`transition focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black ${
-                isActive ? "opacity-100" : "opacity-60"
+                isActive ? "opacity-100" : "opacity-50"
               }`}
             >
               <Image
@@ -115,14 +115,14 @@ const MobileProfile = ({
 
 const DesktopProfile = () => {
   return (
-    <div className="text-left grid md:grid-cols-3 gap-4 md:gap-8 lg:gap-8 md:items-center md:mt-24">
+    <div className="text-left grid lg:grid-cols-3 gap-4 lg:gap-8 lg:gap-8 lg:items-center">
       <ZsuzsaProfile />
       <Image
         src="/images/team/TEAM.png"
         alt="Profile"
         width={600}
         height={400}
-        className="max-w-lg h-auto w-full hidden md:block"
+        className="max-w-lg h-auto w-full hidden lg:block"
       />
       <IsobelProfile />
     </div>
@@ -134,21 +134,23 @@ const ProfileSection = () => {
 
   return (
     <SectionWrapper>
-      <div className="flex flex-col space-y-6 md:space-y-8 lg:space-y-12">
-        <h2 className="">
-          Founded by two women with a lifelong focus on storytelling
-          and&nbsp;collaboration.
-        </h2>
-        <div className="block md:hidden">
+      <div className="flex flex-col space-y-6 md:space-y-8">
+        <div className="">
+          <p className="">
+            Founded by two women with a lifelong focus on storytelling
+            and&nbsp;collaboration.
+          </p>
+        </div>
+        <div className="block lg:hidden">
           <MobileProfile
             activeProfile={activeProfile}
             onSelectProfile={setActiveProfile}
           />
         </div>
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <DesktopProfile />
         </div>
-        <h2 className="text-left md:text-right text-base md:text-2xl lg:text-3xl">
+        <h2 className="text-left lg:text-right text-base lg:text-2xl lg:text-3xl">
           Together, Isobel and Zsuzsa combine cinematic and theatrical craft
           with technical and narrative insight, shaping work that moves fluidly
           across disciplines and reaches audiences in new ways.
