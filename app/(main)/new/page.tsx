@@ -274,7 +274,7 @@ export default function Page() {
           <AnimatePresence mode="wait">
             <motion.h2
               key={current.id}
-              className="text-sm md:text-xl font-accent"
+              className="text-sm md:text-xl font-primary"
               style={{ color: current.accent }}
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}

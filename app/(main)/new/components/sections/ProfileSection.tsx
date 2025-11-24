@@ -6,7 +6,7 @@ import { useState, useMemo } from "react";
 const ZsuzsaProfile = () => {
   return (
     <div className="text-left lg:text-left">
-      <h3 className="font-secondary text-2xl lg:text-4xl lg:pb-4">
+      <h3 className="font-primary text-2xl lg:text-4xl lg:pb-4">
         Zsuzsa Magyar
       </h3>
       <p className="text-sm lg:text-base">
@@ -25,7 +25,7 @@ const ZsuzsaProfile = () => {
 const IsobelProfile = () => {
   return (
     <div className="text-right lg:text-left">
-      <h3 className="font-secondary text-2xl lg:text-4xl lg:pb-4">
+      <h3 className="font-primary text-2xl lg:text-4xl lg:pb-4">
         Isobel McCrum
       </h3>
       <p className="text-sm lg:text-base">
