@@ -11,6 +11,8 @@ export interface FollyCarouselProps {
   maxHeight?: number | string;
   /** When true, carousel starts scrolled to the last slide */
   startAtEnd?: boolean;
+  /** Tailwind text-color class for the arrow buttons (default: "text-white") */
+  arrowColor?: string;
 }
 
 const MOBILE_BREAKPOINT = 768;
@@ -21,6 +23,7 @@ export default function FollyCarousel({
   images,
   maxHeight,
   startAtEnd = false,
+  arrowColor = "text-white",
 }: FollyCarouselProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [slidesPerView, setSlidesPerView] = useState(DESKTOP_SLIDES);
@@ -151,7 +154,7 @@ export default function FollyCarousel({
               aria-label="Previous photo"
               disabled={!canScrollPrev}
               onClick={() => scrollByOneSlide("prev")}
-              className="pointer-events-auto cursor-pointer inline-flex h-10 w-10 items-center justify-center text-white transition md:h-12 md:w-12"
+              className={`pointer-events-auto cursor-pointer inline-flex h-10 w-10 items-center justify-center ${arrowColor} transition md:h-12 md:w-12`}
             >
               <span aria-hidden>⟵</span>
             </button>
@@ -162,7 +165,7 @@ export default function FollyCarousel({
               aria-label="Next photo"
               onClick={() => scrollByOneSlide("next")}
               disabled={!canScrollNext}
-              className="pointer-events-auto cursor-pointer inline-flex h-10 w-10 items-center justify-center text-white transition disabled:opacity-30 md:h-12 md:w-12 ml-auto"
+              className={`pointer-events-auto cursor-pointer inline-flex h-10 w-10 items-center justify-center ${arrowColor} transition disabled:opacity-30 md:h-12 md:w-12 ml-auto`}
             >
               <span aria-hidden>⟶</span>
             </button>

@@ -29,6 +29,7 @@ const InDevelopmentSection = () => {
               { src: "/images/meg&marge/imageRed2.png", alt: "Meg & Marge" },
             ]}
             startAtEnd
+            arrowColor="text-black"
           />
           <div className="absolute bottom-3 right-1 md:bottom-4 md:right-4 z-10 pointer-events-none flex items-center justify-center p-1 md:p-3 w-96 h-20">
             <Image
