@@ -5,7 +5,7 @@ import SectionWrapper from "./components/SectionWrapper";
 import FollyCarousel from "@/app/components/FollyCarousel";
 
 const TICKETS_URL =
-  "https://drive.google.com/drive/folders/1aGSLhn-bEMtlzKi2mAuMmtKfUJq81zEe";
+  "https://www.eventbrite.com/e/reading-meg-marge-tickets-1984490866603?aff=oddtdtcreator";
 
 const InDevelopmentSection = () => {
   return (
