@@ -9,7 +9,7 @@ const TICKETS_URL =
 
 const InDevelopmentSection = () => {
   return (
-    <SectionWrapper className="pt-20 md:pt-0 text-right">
+    <SectionWrapper className="text-right">
       <div className="w-full flex flex-col items-end">
         {/* Top block: tagline */}
         <p className="text-left lg:text-right text-base lg:text-2xl font-primary">

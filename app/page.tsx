@@ -104,30 +104,26 @@ export default function Page() {
       const viewportHeight = window.innerHeight;
       const viewportCenter = viewportHeight / 2;
 
-      // Find which section is most visible (centered or has most area visible)
-      let maxVisibility = 0;
+      let maxScore = -1;
       let newActive = activeRef.current;
 
       refs.forEach((section, index) => {
         const rect = section.getBoundingClientRect();
 
-        // Calculate how much of the section is visible in viewport
-        const visibleTop = Math.max(0, -rect.top);
-        const visibleBottom = Math.min(rect.height, viewportHeight - rect.top);
+        const visibleTop = Math.max(0, rect.top);
+        const visibleBottom = Math.min(viewportHeight, rect.bottom);
         const visibleHeight = Math.max(0, visibleBottom - visibleTop);
-        const visibility = visibleHeight / viewportHeight;
 
-        // Bonus for sections near viewport center
-        const sectionCenter = rect.top + rect.height / 2;
-        const distanceFromCenter = Math.abs(sectionCenter - viewportCenter);
-        const centerBonus = Math.max(
-          0,
-          1 - distanceFromCenter / viewportHeight
-        );
-        const combinedVisibility = visibility * 0.7 + centerBonus * 0.3;
+        const visibleFraction = visibleHeight / Math.min(rect.height, viewportHeight);
 
-        if (combinedVisibility > maxVisibility) {
-          maxVisibility = combinedVisibility;
+        const sectionVisibleCenter = (Math.max(0, rect.top) + Math.min(viewportHeight, rect.bottom)) / 2;
+        const distanceFromCenter = Math.abs(sectionVisibleCenter - viewportCenter);
+        const centerBonus = Math.max(0, 1 - distanceFromCenter / viewportHeight);
+
+        const score = visibleFraction * 0.6 + centerBonus * 0.4;
+
+        if (score > maxScore) {
+          maxScore = score;
           newActive = index;
         }
       });
@@ -138,29 +134,14 @@ export default function Page() {
       }
     };
 
-    // IntersectionObserver for desktop
     const observer = new IntersectionObserver(
-      (entries) => {
-        let maxRatio = 0;
-        let idx = activeRef.current;
-
-        for (const entry of entries) {
-          const i = refs.indexOf(entry.target as HTMLElement);
-          if (i !== -1 && entry.intersectionRatio > maxRatio) {
-            maxRatio = entry.intersectionRatio;
-            idx = i;
-          }
-        }
-
-        if (idx !== activeRef.current) {
-          activeRef.current = idx;
-          setActive(idx);
-        }
+      () => {
+        updateActiveSection();
       },
       {
         root: null,
-        rootMargin: "-20% 0px -20% 0px", // Better detection on mobile
-        threshold: [0, 0.25, 0.5, 0.75, 1], // Simplified thresholds for better performance
+        rootMargin: "-10% 0px -10% 0px",
+        threshold: [0, 0.1, 0.2, 0.3, 0.5, 0.7, 1],
       }
     );
 
@@ -309,8 +290,8 @@ export default function Page() {
         className="relative"
         style={{ color: current.fg, transition: "color 0.4s ease" }}
       >
-        {/* Scroll container with CSS snap - uses window scroll on mobile */}
-        <div className="snap-y snap-mandatory">
+        {/* Scroll container with CSS snap */}
+        <div className="snap-y snap-proximity">
           {sections.map((s, i) => (
             <section
               id={s.id}
@@ -318,13 +299,13 @@ export default function Page() {
               ref={(el) => {
                 sectionRefs.current[i] = el;
               }}
-              className={`snap-start w-full grid h-screen`}
+              className="snap-start w-full min-h-screen flex flex-col"
             >
               <div
-                className={`relative z-10 w-full min-h-full grid ${
+                className={`relative z-10 w-full flex-1 flex ${
                   s.id === "archive"
-                    ? "place-items-center md:place-items-end"
-                    : "place-items-center"
+                    ? "items-center md:items-end justify-center"
+                    : "items-center justify-center"
                 }`}
               >
                 {s.component}

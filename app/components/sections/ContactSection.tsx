@@ -5,21 +5,22 @@ import Footer from "./Footer";
 
 const ContactSection = () => {
   return (
-    <SectionWrapper className="text-xl sm:text-4xl md:text-5xl lg:text-7xl h-full">
-      <div className="grid grid-rows-3 h-full">
-        <div />
-        <div className="flex flex-col">
-          <a
-            href="mailto:hello@follyproductions.com"
-            className="break-all md:break-normal"
-          >
-            hello@follyproductions.com
-          </a>
-          <a href="https://www.instagram.com/follyproductions/" target="_blank">
-            @follyproductions
-          </a>
+    <SectionWrapper className="text-xl sm:text-4xl md:text-5xl lg:text-7xl flex-1 !py-0">
+      <div className="flex flex-col flex-1 min-h-[calc(100vh-0px)]">
+        <div className="flex-1 flex items-center">
+          <div className="flex flex-col py-20">
+            <a
+              href="mailto:hello@follyproductions.com"
+              className="break-all md:break-normal"
+            >
+              hello@follyproductions.com
+            </a>
+            <a href="https://www.instagram.com/follyproductions/" target="_blank">
+              @follyproductions
+            </a>
+          </div>
         </div>
-        <div className="absolute bottom-0 w-full right-0 left-0">
+        <div className="w-full mt-auto">
           <Footer />
         </div>
       </div>

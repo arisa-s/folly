@@ -4,7 +4,7 @@ import FollyCarousel from "@/app/components/FollyCarousel";
 
 const ArchiveSection = () => {
   return (
-    <SectionWrapper className="pt-30 md:pt-0">
+    <SectionWrapper>
       <div className="w-full flex flex-col items-start gap-4 ">
         <div className="w-full max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl ml-auto -mr-2 md:-mr-9">
           <FollyCarousel
