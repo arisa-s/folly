@@ -303,9 +303,11 @@ export default function Page() {
             >
               <div
                 className={`relative z-10 w-full flex-1 flex ${
-                  s.id === "archive"
-                    ? "items-center md:items-end justify-center"
-                    : "items-center justify-center"
+                  s.id === "hero"
+                    ? "items-stretch"
+                    : s.id === "archive"
+                      ? "items-center md:items-end justify-center"
+                      : "items-center justify-center"
                 }`}
               >
                 {s.component}

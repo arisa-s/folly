@@ -24,7 +24,7 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="relative h-full w-full flex items-center justify-center right-0 left-0">
+    <div className="relative h-screen w-full flex items-center justify-center right-0 left-0">
       <VideoBackground src="/videos/gmm.mp4" />
       <AnimatePresence>
         {showButton && (
