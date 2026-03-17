@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type React from "react";
+import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import HeroSection from "./components/sections/HeroSection";
@@ -9,12 +10,16 @@ import AboutSection from "./components/sections/AboutSection";
 import ArchiveSection from "./components/sections/ArchiveSection";
 import ProfileSection from "./components/sections/ProfileSection";
 import ContactSection from "./components/sections/ContactSection";
+import InDevelopmentSection from "./components/sections/InDevelopmentSection";
 import { FOLLY_COLORS } from "@/public/colors";
 import BackgroundColorLayer from "./components/BackgroundColorLayer";
 import HamburgerMenu from "./components/HamburgerMenu";
 import DotIndicator from "./components/DotIndicator";
 
 export default function Page() {
+  const searchParams = useSearchParams();
+  const dev = searchParams.get("dev") === "true";
+
   const sections = useMemo(
     () =>
       [
@@ -42,6 +47,18 @@ export default function Page() {
           fg: FOLLY_COLORS.black,
           accent: FOLLY_COLORS.red,
         },
+        ...(dev
+          ? [
+              {
+                id: "in-development",
+                component: <InDevelopmentSection />,
+                title: "In Development",
+                bg: FOLLY_COLORS.white,
+                fg: FOLLY_COLORS.red,
+                accent: FOLLY_COLORS.red,
+              },
+            ]
+          : []),
         {
           id: "archive",
           component: <ArchiveSection />,
@@ -66,7 +83,7 @@ export default function Page() {
         accent: string;
         component?: React.ReactNode;
       }>,
-    []
+    [dev]
   );
 
   const [active, setActive] = useState(0);

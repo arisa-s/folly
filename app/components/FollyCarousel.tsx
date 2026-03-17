@@ -9,6 +9,8 @@ export interface FollyCarouselProps {
     alt: string;
   }[];
   maxHeight?: number | string;
+  /** When true, carousel starts scrolled to the last slide */
+  startAtEnd?: boolean;
 }
 
 const MOBILE_BREAKPOINT = 768;
@@ -18,6 +20,7 @@ const MOBILE_SLIDES = 1.35; // 1 full card + partial second
 export default function FollyCarousel({
   images,
   maxHeight,
+  startAtEnd = false,
 }: FollyCarouselProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [slidesPerView, setSlidesPerView] = useState(DESKTOP_SLIDES);
@@ -75,6 +78,18 @@ export default function FollyCarousel({
     node.addEventListener("scroll", handleScroll, { passive: true });
     return () => node.removeEventListener("scroll", handleScroll);
   }, [updateArrowState, slidesPerView, images.length]);
+
+  useEffect(() => {
+    if (!startAtEnd || images.length <= 1) return;
+    const node = trackRef.current;
+    if (!node) return;
+    const scrollToEnd = () => {
+      node.scrollLeft = node.scrollWidth - node.clientWidth;
+      updateArrowState();
+    };
+    const t = requestAnimationFrame(scrollToEnd);
+    return () => cancelAnimationFrame(t);
+  }, [startAtEnd, images.length, updateArrowState]);
 
   const scrollByOneSlide = useCallback(
     (direction: "prev" | "next") => {
