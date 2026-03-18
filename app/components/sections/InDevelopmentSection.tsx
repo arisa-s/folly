@@ -10,11 +10,8 @@ const TICKETS_URL =
 const InDevelopmentSection = () => {
   return (
     <SectionWrapper className="text-right">
-      <div className="w-full flex flex-col items-end">
+      <div className="w-full flex flex-col items-end md:pt-20">
         {/* Top block: tagline */}
-        <p className="text-left lg:text-right text-base lg:text-2xl font-primary">
-          Coming soon
-        </p>
         <div className="w-full ml-auto mb-4 md:mb-6">
           <p>
             A two-woman comedic exploration of female desire and
@@ -31,7 +28,7 @@ const InDevelopmentSection = () => {
             startAtEnd
             arrowColor="text-black"
           />
-          <div className="bg-folly-white absolute bottom-3 right-1 md:bottom-4 md:right-4 z-10 pointer-events-none flex items-center justify-center p-1 md:p-3 w-96 h-20">
+          <div className="absolute bottom-3 right-1 md:bottom-4 md:right-4 z-10 pointer-events-none flex items-center justify-center p-1 md:p-3 w-96 h-20">
             <Image
               src="/images/meg&marge/logoFlat.png"
               alt="Meg & Marge"

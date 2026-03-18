@@ -31,22 +31,6 @@ export default function Page() {
           fg: FOLLY_COLORS.white,
           accent: FOLLY_COLORS.red,
         },
-        {
-          id: "about",
-          component: <AboutSection />,
-          title: "About",
-          bg: FOLLY_COLORS.red,
-          fg: FOLLY_COLORS.blue,
-          accent: FOLLY_COLORS.yellow,
-        },
-        {
-          id: "profile",
-          component: <ProfileSection />,
-          title: "Team",
-          bg: FOLLY_COLORS.yellow, // gray-800
-          fg: FOLLY_COLORS.black,
-          accent: FOLLY_COLORS.red,
-        },
         ...(dev
           ? [
               {
@@ -60,12 +44,29 @@ export default function Page() {
             ]
           : []),
         {
+          id: "about",
+          component: <AboutSection />,
+          title: "About",
+          bg: FOLLY_COLORS.red,
+          fg: FOLLY_COLORS.blue,
+          accent: FOLLY_COLORS.yellow,
+        },
+
+        {
           id: "archive",
           component: <ArchiveSection />,
           title: "Recent Work",
           bg: FOLLY_COLORS.blue, // teal-700
           fg: FOLLY_COLORS.black,
           accent: FOLLY_COLORS.yellow,
+        },
+        {
+          id: "profile",
+          component: <ProfileSection />,
+          title: "Team",
+          bg: FOLLY_COLORS.yellow, // gray-800
+          fg: FOLLY_COLORS.black,
+          accent: FOLLY_COLORS.red,
         },
         {
           id: "contact",
@@ -83,7 +84,7 @@ export default function Page() {
         accent: string;
         component?: React.ReactNode;
       }>,
-    [dev]
+    [dev],
   );
 
   const [active, setActive] = useState(0);
@@ -114,11 +115,18 @@ export default function Page() {
         const visibleBottom = Math.min(viewportHeight, rect.bottom);
         const visibleHeight = Math.max(0, visibleBottom - visibleTop);
 
-        const visibleFraction = visibleHeight / Math.min(rect.height, viewportHeight);
+        const visibleFraction =
+          visibleHeight / Math.min(rect.height, viewportHeight);
 
-        const sectionVisibleCenter = (Math.max(0, rect.top) + Math.min(viewportHeight, rect.bottom)) / 2;
-        const distanceFromCenter = Math.abs(sectionVisibleCenter - viewportCenter);
-        const centerBonus = Math.max(0, 1 - distanceFromCenter / viewportHeight);
+        const sectionVisibleCenter =
+          (Math.max(0, rect.top) + Math.min(viewportHeight, rect.bottom)) / 2;
+        const distanceFromCenter = Math.abs(
+          sectionVisibleCenter - viewportCenter,
+        );
+        const centerBonus = Math.max(
+          0,
+          1 - distanceFromCenter / viewportHeight,
+        );
 
         const score = visibleFraction * 0.6 + centerBonus * 0.4;
 
@@ -142,7 +150,7 @@ export default function Page() {
         root: null,
         rootMargin: "-10% 0px -10% 0px",
         threshold: [0, 0.1, 0.2, 0.3, 0.5, 0.7, 1],
-      }
+      },
     );
 
     refs.forEach((node) => observer.observe(node));
@@ -273,7 +281,7 @@ export default function Page() {
             <motion.h2
               key={current.id}
               className="text-sm md:text-xl font-primary"
-              style={{ color: current.accent }}
+              style={{ color: current.fg }}
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 10 }}
