@@ -31,8 +31,6 @@ export default function FollyCarousel({
   const [canScrollNext, setCanScrollNext] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  console.log({ canScrollPrev });
-
   const resolvedMaxHeight =
     typeof maxHeight === "number" ? `${maxHeight}px` : maxHeight;
 
@@ -54,14 +52,6 @@ export default function FollyCarousel({
     const maxScrollLeft = node.scrollWidth - node.clientWidth;
     const prevValue = maxScrollLeft > 0 && node.scrollLeft > 8;
     const nextValue = maxScrollLeft > 0 && node.scrollLeft < maxScrollLeft - 8;
-    console.log("updateArrowState", {
-      scrollLeft: node.scrollLeft,
-      maxScrollLeft,
-      scrollWidth: node.scrollWidth,
-      clientWidth: node.clientWidth,
-      prevValue,
-      nextValue,
-    });
     setCanScrollPrev(prevValue);
     setCanScrollNext(nextValue);
   }, []);
@@ -83,16 +73,24 @@ export default function FollyCarousel({
   }, [updateArrowState, slidesPerView, images.length]);
 
   useEffect(() => {
-    if (!startAtEnd || images.length <= 1) return;
+    if (!startAtEnd || images.length <= 1 || !mounted) return;
     const node = trackRef.current;
     if (!node) return;
+    let cancelled = false;
     const scrollToEnd = () => {
+      if (cancelled) return;
       node.scrollLeft = node.scrollWidth - node.clientWidth;
       updateArrowState();
     };
-    const t = requestAnimationFrame(scrollToEnd);
-    return () => cancelAnimationFrame(t);
-  }, [startAtEnd, images.length, updateArrowState]);
+    // Double RAF: first runs before paint, second runs after layout is computed
+    const t1 = requestAnimationFrame(() => {
+      requestAnimationFrame(scrollToEnd);
+    });
+    return () => {
+      cancelled = true;
+      cancelAnimationFrame(t1);
+    };
+  }, [startAtEnd, images.length, updateArrowState, slidesPerView, mounted]);
 
   const scrollByOneSlide = useCallback(
     (direction: "prev" | "next") => {
