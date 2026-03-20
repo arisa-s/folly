@@ -31,18 +31,14 @@ export default function Page() {
           fg: FOLLY_COLORS.white,
           accent: FOLLY_COLORS.red,
         },
-        ...(dev
-          ? [
-              {
-                id: "in-development",
-                component: <InDevelopmentSection />,
-                title: "In Development",
-                bg: FOLLY_COLORS.white,
-                fg: FOLLY_COLORS.red,
-                accent: FOLLY_COLORS.red,
-              },
-            ]
-          : []),
+        {
+          id: "in-development",
+          component: <InDevelopmentSection />,
+          title: "In Development",
+          bg: FOLLY_COLORS.white,
+          fg: FOLLY_COLORS.red,
+          accent: FOLLY_COLORS.red,
+        },
         {
           id: "about",
           component: <AboutSection />,
