@@ -10,10 +10,10 @@ const ContactSection = () => {
         <div className="flex-1 flex items-end">
           <div className="flex flex-col py-52 md:py-40">
             <a
-              href="mailto:hello@follyproductions.com"
+              href="mailto:team@follyproductions.com"
               className="break-all md:break-normal"
             >
-              hello@follyproductions.com
+              team@follyproductions.com
             </a>
             <a
               href="https://www.instagram.com/follyproductions/"
