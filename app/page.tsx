@@ -15,6 +15,7 @@ import { FOLLY_COLORS } from "@/public/colors";
 import BackgroundColorLayer from "./components/BackgroundColorLayer";
 import HamburgerMenu from "./components/HamburgerMenu";
 import DotIndicator from "./components/DotIndicator";
+import { DONATE_URL, WHATS_ON_URL } from "./links";
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -216,6 +217,10 @@ export default function Page() {
       {/* Top-right hamburger */}
       <HamburgerMenu
         sections={sections.map(({ id, title }) => ({ id, title }))}
+        links={[
+          { title: "What’s On", href: WHATS_ON_URL },
+          { title: "Donate", href: DONATE_URL, external: true },
+        ]}
         active={active}
         onSelect={scrollTo}
         textColor={current.fg}

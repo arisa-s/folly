@@ -8,8 +8,15 @@ interface SectionMeta {
   title?: string;
 }
 
+interface MenuLink {
+  title: string;
+  href: string;
+  external?: boolean;
+}
+
 interface HamburgerMenuProps {
   sections: SectionMeta[];
+  links?: MenuLink[];
   active: number;
   onSelect: (index: number) => void;
   textColor: string;
@@ -18,6 +25,7 @@ interface HamburgerMenuProps {
 
 export default function HamburgerMenu({
   sections,
+  links = [],
   active,
   onSelect,
   textColor,
@@ -67,7 +75,7 @@ export default function HamburgerMenu({
               >
                 ✕
               </button>
-              <ul className="space-y-4 text-center">
+              <ul className="space-y-1 md:space-y-2 text-center">
                 {sections.map((s, i) => (
                   <li key={s.id}>
                     <button
@@ -75,7 +83,7 @@ export default function HamburgerMenu({
                         onSelect(i);
                         setMenuOpen(false);
                       }}
-                      className={`block w-full px-8 py-4 text-3xl md:text-4xl lg:text-5xl xl:text-6xl hover:opacity-70 transition-opacity cursor-pointer ${
+                      className={`block w-full px-8 py-2 md:py-3 text-3xl md:text-4xl lg:text-5xl hover:opacity-70 transition-opacity cursor-pointer ${
                         i === active
                           ? "font-bold font-accent"
                           : "font-normal font-secondary"
@@ -87,6 +95,21 @@ export default function HamburgerMenu({
                     >
                       {s.title || s.id}
                     </button>
+                  </li>
+                ))}
+                {links.map((link) => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      {...(link.external
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                      onClick={() => setMenuOpen(false)}
+                      className="block w-full px-8 py-2 md:py-3 text-3xl md:text-4xl lg:text-5xl hover:opacity-70 transition-opacity cursor-pointer font-normal font-secondary"
+                      style={{ color: textColor, opacity: 0.5 }}
+                    >
+                      {link.title}
+                    </a>
                   </li>
                 ))}
               </ul>
