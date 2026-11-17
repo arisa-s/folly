@@ -60,59 +60,62 @@ export default function HamburgerMenu({
         {menuOpen && (
           <motion.div
             aria-label="Section menu"
-            className="fixed inset-0 z-[100 backdrop-blur-md backdrop-filter"
+            className="fixed inset-0 z-[100] backdrop-blur-md backdrop-filter"
             style={{ backgroundColor: bgColor, backdropFilter: "blur(10px)" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="flex h-full items-center justify-center">
-              <button
-                style={{ color: textColor }}
-                onClick={() => setMenuOpen(false)}
-                className="absolute top-10 md:top-8 right-4 md:right-8 text-3xl md:text-5xl cursor-pointer"
-              >
-                ✕
-              </button>
-              <ul className="space-y-1 md:space-y-2 text-center">
-                {sections.map((s, i) => (
-                  <li key={s.id}>
-                    <button
-                      onClick={() => {
-                        onSelect(i);
-                        setMenuOpen(false);
-                      }}
-                      className={`block w-full px-8 py-2 md:py-3 text-3xl md:text-4xl lg:text-5xl hover:opacity-70 transition-opacity cursor-pointer ${
-                        i === active
-                          ? "font-bold font-accent"
-                          : "font-normal font-secondary"
-                      }`}
-                      style={{
-                        color: textColor,
-                        opacity: i === active ? 1 : 0.5,
-                      }}
-                    >
-                      {s.title || s.id}
-                    </button>
-                  </li>
-                ))}
-                {links.map((link) => (
-                  <li key={link.href}>
-                    <a
-                      href={link.href}
-                      {...(link.external
-                        ? { target: "_blank", rel: "noopener noreferrer" }
-                        : {})}
-                      onClick={() => setMenuOpen(false)}
-                      className="block w-full px-8 py-2 md:py-3 text-3xl md:text-4xl lg:text-5xl hover:opacity-70 transition-opacity cursor-pointer font-normal font-secondary"
-                      style={{ color: textColor, opacity: 0.5 }}
-                    >
-                      {link.title}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+            <button
+              style={{ color: textColor }}
+              onClick={() => setMenuOpen(false)}
+              aria-label="Close menu"
+              className="absolute top-10 md:top-8 right-4 md:right-8 z-10 text-3xl md:text-5xl cursor-pointer"
+            >
+              ✕
+            </button>
+            <div className="h-full overflow-y-auto overscroll-contain">
+              <div className="flex min-h-full items-center justify-center py-20">
+                <ul className="space-y-1 md:space-y-2 text-center">
+                  {sections.map((s, i) => (
+                    <li key={s.id}>
+                      <button
+                        onClick={() => {
+                          onSelect(i);
+                          setMenuOpen(false);
+                        }}
+                        className={`block w-full px-8 py-2 md:py-3 text-3xl md:text-4xl lg:text-5xl hover:opacity-70 transition-opacity cursor-pointer ${
+                          i === active
+                            ? "font-bold font-accent"
+                            : "font-normal font-secondary"
+                        }`}
+                        style={{
+                          color: textColor,
+                          opacity: i === active ? 1 : 0.5,
+                        }}
+                      >
+                        {s.title || s.id}
+                      </button>
+                    </li>
+                  ))}
+                  {links.map((link) => (
+                    <li key={link.href}>
+                      <a
+                        href={link.href}
+                        {...(link.external
+                          ? { target: "_blank", rel: "noopener noreferrer" }
+                          : {})}
+                        onClick={() => setMenuOpen(false)}
+                        className="block w-full px-8 py-2 md:py-3 text-3xl md:text-4xl lg:text-5xl hover:opacity-70 transition-opacity cursor-pointer font-normal font-secondary"
+                        style={{ color: textColor, opacity: 0.5 }}
+                      >
+                        {link.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </motion.div>
         )}
